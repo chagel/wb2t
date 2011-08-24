@@ -1,0 +1,25 @@
+*** INSTALL ***
+
+1. Get the latest source file:
+	git clone git://github.com/chagel/wb2t.git
+
+2. Install required Ruby Gems:
+	gem install simple-rss
+	gem install twitter
+
+3. Open wb2t.rb and update configurations:
+	a. Apply Twitter API app and update configurations below:
+		config.consumer_key = 'YOUR DATA'
+		config.consumer_secret = 'YOUR DATA'
+		config.oauth_token = 'YOUR DATA'
+		config.oauth_token_secret = 'YOUR DATA'
+		
+	b. Update your Weibo friendly domain name in @@weibo_rss link:
+		@@weibo_rss = "http://medcl.net/sinarss/?uname=WEIBO_ACCOUNT&originalimage=false&titlelimit=200"
+	
+	c. Optionally, you can update two log files:
+		@@sync_time = "wb2t_st"
+	  @@sync_log = "wb2t.log"
+	
+4. Add a task in your cron job:
+	*/5 * * * * ruby /home/mike/wb2t/wb2t.rb
