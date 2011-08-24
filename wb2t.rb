@@ -6,7 +6,6 @@ require 'rubygems'
 require 'twitter'
 require 'simple-rss'
 require 'open-uri'
-require 'time'
 
 Twitter.configure do |config|
   config.consumer_key = 'YOUR DATA'
@@ -16,7 +15,7 @@ Twitter.configure do |config|
 end
 
 class Weibo2Twitter
-  @@weibo_rss = "http://medcl.net/sinarss/?uname=chagel"
+  @@weibo_rss = "http://medcl.net/sinarss/?uname=chagel&t=#{Time.now.to_i}"
   @@sync_time = "/Users/mike/dev/workspace/wb2t/wb2t_st"
   @@sync_log = "/Users/mike/dev/workspace/wb2t/wb2t.log"
 
@@ -29,7 +28,7 @@ class Weibo2Twitter
         if Time.parse(item.pubDate.to_s) > Time.parse(last_sync_time.to_s)
           debug "sync message - #{item.pubDate} - #{item.title}"
           Twitter.update "#{item.title}"
-          dump_data item.pubDate
+          dump_data item.pubDate.to_s
           sleep 3
         end
       end
